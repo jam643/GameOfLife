@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#!/usr/bin/env pipenv-shebang
 """
 Created on Mon May 30 23:55:39 2016
 
@@ -8,7 +8,7 @@ import pygame
 import math
 import random
 import pickle
-import eztext
+import eztext.eztext as eztext
 
 white = (255,255,255)
 black = (0,0,0)
@@ -91,7 +91,7 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode((screen_width,screen_height))
     pygame.display.set_caption('Game Of Life')
-    player_icon = pygame.image.load('craft.png')
+    player_icon = pygame.image.load('images/craft.png')
     pygame.display.set_icon(player_icon)
     clock = pygame.time.Clock()
     
@@ -120,7 +120,7 @@ class GameScene(SceneBase):
         SceneBase.__init__(self)
         
         pygame.mouse.set_visible(0)
-        self.score_font = pygame.font.Font("pixelFont.ttf", 16)
+        self.score_font = pygame.font.Font("font/pixelFont.ttf", 16)
         
         self.bullet_list = pygame.sprite.Group()
         self.star_list = pygame.sprite.Group()
@@ -241,16 +241,16 @@ class TitleScene(SceneBase):
     def __init__(self):
         SceneBase.__init__(self)
         pygame.mouse.set_visible(1)
-        self.play = pygame.image.load('play.png').convert()
+        self.play = pygame.image.load('images/play.png').convert()
         self.play.set_colorkey((1,1,1))
         self.play = pygame.transform.scale(self.play,(240,80))
-        self.play_press = pygame.image.load('play_press.png').convert()
+        self.play_press = pygame.image.load('images/play_press.png').convert()
         self.play_press.set_colorkey((1,1,1))
         self.play_button = Button(self.play,self.play_press,(0,0))
         
         self.mouse = Mouse()
         
-        self.title_font = pygame.font.Font("pixelFont.ttf", 60)
+        self.title_font = pygame.font.Font("font/pixelFont.ttf", 60)
         self.star_list = pygame.sprite.Group() 
         numStars = 1000
         
@@ -285,25 +285,25 @@ class GameOverScene(SceneBase):
         self.rank = rank
         self.high_scores = high_scores
        
-        self.retry = pygame.image.load('retry.png').convert()
+        self.retry = pygame.image.load('images/retry.png').convert()
         self.retry.set_colorkey((1,1,1))
         self.retry = pygame.transform.scale(self.retry,(240,80))
-        self.retry_hover = pygame.image.load('retry_hover.png').convert()
+        self.retry_hover = pygame.image.load('images/retry_hover.png').convert()
         self.retry_hover.set_colorkey((1,1,1))
         self.retry_button = Button(self.retry,self.retry_hover,(-200,240))
-        self.menu = pygame.image.load('menu.png').convert()
+        self.menu = pygame.image.load('images/menu.png').convert()
         self.menu.set_colorkey((1,1,1))
         self.menu = pygame.transform.scale(self.menu,(240,80))
-        self.menu_hover = pygame.image.load('menu_hover.png').convert()
+        self.menu_hover = pygame.image.load('images/menu_hover.png').convert()
         self.menu_hover.set_colorkey((1,1,1))
         self.menu_button = Button(self.menu,self.menu_hover,(200,240))
         
         self.mouse = Mouse()
         
-        self.large_font = pygame.font.Font("pixelFont.ttf", 50)
-        self.med_font = pygame.font.Font("pixelFont.ttf", 24)
-        self.small_font = pygame.font.Font("pixelFont.ttf", 16)
-        self.win_font = pygame.font.Font("pixelFont.ttf", 20)
+        self.large_font = pygame.font.Font("font/pixelFont.ttf", 50)
+        self.med_font = pygame.font.Font("font/pixelFont.ttf", 24)
+        self.small_font = pygame.font.Font("font/pixelFont.ttf", 16)
+        self.win_font = pygame.font.Font("font/pixelFont.ttf", 20)
         
         self.star_list = pygame.sprite.Group() 
         numStars = 1000
@@ -360,19 +360,19 @@ class HighScoreScene(SceneBase):
         self.rank = rank
         self.high_scores = high_scores
        
-        self.enter = pygame.image.load('enter.png').convert()
+        self.enter = pygame.image.load('images/enter.png').convert()
         self.enter.set_colorkey((1,1,1))
         self.enter = pygame.transform.scale(self.enter,(240,80))
-        self.enter_hover = pygame.image.load('enter_hover.png').convert()
+        self.enter_hover = pygame.image.load('images/enter_hover.png').convert()
         self.enter_hover.set_colorkey((1,1,1))
         self.enter_button = Button(self.enter,self.enter_hover,(0,200))
         
         self.mouse = Mouse()
         
-        self.large_font = pygame.font.Font("pixelFont.ttf", 40)
-        self.med_font = pygame.font.Font("pixelFont.ttf", 30)
-        self.small_font = pygame.font.Font("pixelFont.ttf", 16)
-        self.win_font = pygame.font.Font("pixelFont.ttf", 20)
+        self.large_font = pygame.font.Font("font/pixelFont.ttf", 40)
+        self.med_font = pygame.font.Font("font/pixelFont.ttf", 30)
+        self.small_font = pygame.font.Font("font/pixelFont.ttf", 16)
+        self.win_font = pygame.font.Font("font/pixelFont.ttf", 20)
         
         self.txtbx = eztext.Input(maxlength=12, 
                                   color=white, 
@@ -475,7 +475,7 @@ class Mouse(object):
 class Heart(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load('heart.png').convert()
+        self.image = pygame.image.load('images/heart.png').convert()
         self.image.set_colorkey((1,1,1))
         self.rect = self.image.get_rect()
         
@@ -546,7 +546,7 @@ class Player(pygame.sprite.Sprite):
         self.rest_coeff = 0.3  
         self.size = 30
         
-        self.image = pygame.image.load('boat_anim3.png').convert()
+        self.image = pygame.image.load('images/boat_anim3.png').convert()
         self.image.set_colorkey((1,1,1))
         self.image_orig = self.image
         self.rect = self.image.get_rect()
@@ -637,7 +637,7 @@ class Player(pygame.sprite.Sprite):
 class Crosshair(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load('crosshair.png').convert()
+        self.image = pygame.image.load('images/crosshair.png').convert()
         self.image.set_colorkey((1,1,1))
         self.rect = self.image.get_rect()
         
@@ -695,7 +695,7 @@ class Ship(pygame.sprite.Sprite):
         self.vel = 100     
         self.health = 1
         
-        self.image = pygame.image.load('ship.png').convert()
+        self.image = pygame.image.load('images/ship.png').convert()
         self.image.set_colorkey((1,1,1))
         self.image_orig= self.image
         self.rect_orig = self.image.get_rect()
